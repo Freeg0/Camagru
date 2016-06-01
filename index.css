@@ -1,0 +1,65 @@
+body
+{
+    background-color: white;
+    padding: 0;
+    margin: 0;
+    font-family: Arial;
+    font-size: 16px;
+    overflow-y: scroll;
+}
+
+#Topbar
+{
+	display: block;
+	width: 100%;
+	height: 50px;
+	background-color: #cecece;
+}
+
+.topbar
+{
+	margin-bottom: 0;
+	width: 100%;
+	height: 10px;
+	background-color: #6e6e6e;
+}
+
+#Footer
+{
+	margin-top: 30px;
+	width: 100%;
+	height: 50px;
+	background-color: #cecece;
+}
+
+.footer
+{
+	width: 100%;
+	height: 10px;
+	background-color: #6e6e6e;
+}
+
+#choice
+{
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;	
+}
+
+#signin
+{
+	margin-top: 10px;
+	margin-left: 25%;
+	float: left;
+	width: 200px;
+	height: 300px;
+}
+
+#signup
+{
+	margin-right: 10%;
+	margin-top: 10px;
+	float: right;
+	width: 200px;
+	height: 300px;
+}	
