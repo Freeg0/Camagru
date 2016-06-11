@@ -44,8 +44,9 @@ $_SESSION['loginOK'] = False;
 			</br>
 			<a>Confirm Password :<input type="password" name="cpassword" value="" /></a>
 			</br>
-			<input type="submit" name="submit" value="Sign-Up" /><input type="submit" name="submit" value="Password Forget it?" />
+			<input type="submit" name="submit" value="Sign-Up" />
 		</form>
+		<input type="submit" name="submit" value="Password Forget it?" />
 	</Div>
 </Div>
 

@@ -5,7 +5,7 @@ include 'config/setup.php';
 
 if (isset($_POST['submit']))
 {
-	$password = $db->quote($_POST['password']);
+	$password = $db->quote(sha1($_POST['password']));
 	$userName = $db->quote($_POST['login']);
 
 	if (isset($_POST['login']) && isset($_POST['password']))

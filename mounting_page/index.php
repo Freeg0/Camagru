@@ -2,7 +2,7 @@
   session_start();
   if (!$_SESSION['loginOK']) {
     header('Location: ../'); 
-  } 
+  }
 ?> 
 
 <!DOCTYPE html>
@@ -13,11 +13,15 @@
 	<title>Camagru - Mounting page</title>
 </head>
 <body>
-
 	<p style="text-align:center;"><img align="middle" src="http://img.linuxfr.org/img/68747470733a2f2f75706c6f61642e77696b696d656469612e6f72672f77696b6970656469612f636f6d6d6f6e732f352f35362f416e737765725f746f5f4c6966652e706e67/Answer_to_Life.png" title="42"/></p>
 	<p style="text-align: center; font-size: 30px; font-weight: bold; color: #3B0B17;">- Camagram -</p>
 <Div id="Topbar">
 	<Div class="topbar"></Div>
+  <ul>
+    <li><a href="../gallery">Gallery</a></li>
+    <li><a href="../">logout</a></li>
+    <li><a href="#">Hi <?php echo $_SESSION['user']; ?> !</a></li>
+  </ul>
 </Div>
 
 <video id="video"></video>
@@ -91,6 +95,7 @@
     ajax.open("POST",'upload_canvas.php',false);
     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     ajax.send("photo=" + canvasData + "&value=" + choix);
+    location.reload();
     // var ajax2 = new XMLHttpRequest();
     // ajax2.open("POST",'upload_canvas.php',false);
     // ajax2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -107,7 +112,7 @@
 
 <Div id="photomontage">
   <img style="height: 200px; width: 200px;" src="photo_camagram/cadre1.png" />
-  <INPUT type="radio" name="choix" value="1"/>
+  <INPUT type="radio" name="choix" value="1" checked/>
   <img style="margin-left: 25px; height: 200px; width: 200px;" src="photo_camagram/cadre2.png" />
   <INPUT type="radio" name="choix" value="2"/>
   <img style="margin-left: 25px; height: 200px; width: 200px;" src="photo_camagram/cadre3.png" />
@@ -115,9 +120,30 @@
 </Div>
 
 <Div id="galerie">
+<a style="margin-left: 2%; color: Black;">All my pictures :</a></br>
 <?php
+  session_start();
+
+  $nb = 0;
+
+  while (file_exists("../img/".$_SESSION['user']."/img".$nb.".png")) {
+    $nb = $nb + 1;
+  }
+  $nb = $nb - 1;
+
+  while (file_exists("../img/".$_SESSION['user']."/img".$nb.".png")) {
+    $resultat = "../img/".$_SESSION['user']."/img".$nb.".png";
+echo <<<EOT
+  <img style="margin: 1%; height: 200px; width: 213px;" src="$resultat" />
+EOT;
+    $nb = $nb - 1;
+  }
+
+?>
+<!-- <?php
   include '../config/setup.php';
 
+  
   $sth = $db->prepare("SELECT filepath FROM image");
   $sth->execute();
 
@@ -129,7 +155,7 @@ echo <<<EOT
 EOT;
 }
 
-?>
+?> -->
 </Div>
 
 <Div id="Footer">
