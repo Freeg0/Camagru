@@ -21,29 +21,34 @@
 <Div id="Topbar">
 	<Div class="topbar"></Div>
   <ul>
-  	<li><a href="./index.php" onClick="">Gallery</a></li>
-    <li><a href="../mounting_page" onClick="">Mouting page</a></li>
-    <li><a href="../" onClick="">logout</a></li>
-    <li><a href="#" onClick="">Hi <?php echo $_SESSION['user']; ?> !</a></li>
+  	<li><a href="./index.php" onclick="">Gallery</a></li>
+    <li><a href="../mounting_page" onclick="">Mouting page</a></li>
+    <li><a href="../" onclick="">logout</a></li>
+    <li><a href="#" onclick="">Hi <?php echo $_SESSION['user']; ?> !</a></li>
   </ul>
 </Div>
 
 <Div>
 <?php $_SESSION['src'] = $_POST['src']; ?>
 <?php
+
+include '../config/setup.php';
+
 if (file_exists("tmp1")) {
 	$myfile = fopen("tmp1", "r") or die("Unable to open file!");
-	$lol = fread($myfile,filesize("tmp1"));
+	$f = fread($myfile,filesize("tmp1"));
 	fclose($myfile);
 }
 else {
 	$myfile = fopen("tmp2", "r") or die("Unable to open file!");
-	$lol = fread($myfile,filesize("tmp2"));
+	$f = fread($myfile,filesize("tmp2"));
 	fclose($myfile);
 }
 
+$_SESSION['path'] = $f;
+
 echo <<<EOT
-  <p style="text-align:center;"><img style="margin: 1%; height: 400px; width: 400px;" src="$lol" /></p>
+  <p style="text-align:center;"><img style="margin: 1%; height: 400px; width: 400px;" src="$f" /></p>
 EOT;
 
 if (file_exists("tmp1")) {
@@ -51,7 +56,48 @@ if (file_exists("tmp1")) {
 	unlink("tmp1");
 }
 
+$data = $db->prepare("SELECT id FROM `like` WHERE filepathimage = :f");
+$data->execute(Array(
+		'f' => $f
+	));
+
+$nb_like = $data->rowCount();
+
+echo <<<EOT
+	<p style="text-align:center; margin: 0 auto; "><img align="middle" src="coeur.png" title="42"/></p>
+	<form method="post" action="like.php">
+		<p style="text-align:center; margin: 0 auto; ">$nb_like<input type="submit" name="submit" value="Like" id="likeit"/></p>
+	</form>
+EOT;
+
 ?>
+</Div>
+
+<Div id="commentdiv">
+<?php
+
+$user1 = $_SESSION['user'];
+$file = $_SESSION['path'];
+
+$sth = $db->prepare("SELECT comment FROM comments WHERE filepathimage = :file");
+$sth->execute(Array(
+		'file' => $file
+	));
+
+
+$result = $sth->fetchall();
+
+foreach ($result as $results) {
+echo <<<EOT
+		<b style="color: black;">$user1 : $results[0]</b></br>
+EOT;
+}
+?>
+
+	<form method="post" action="comment.php">
+		<input type="text" name="commentaire" value=""/>
+		<input type="submit" name="submit" value="comment"/>
+	</form>
 </Div>
 
 <Div id="Footer">

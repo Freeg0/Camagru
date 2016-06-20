@@ -14,8 +14,8 @@ try {
 	$inject = "use DB_CAMAGRU;
 					create table user (`id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, `user` varchar(255) NOT NULL, `password` varchar(255) NOT NULL, `email` varchar(255) NOT NULL);
 					create table image (`id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, `user` varchar(255) NOT NULL, `filepath` varchar(255) NOT NULL);
-					create table like (`id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, `user` varchar(255) NOT NULL, `filepathimage` varchar(255) NOT NULL);
-					create table comments (`id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, `user` varchar(255) NOT NULL, `filepathimage` varchar(255) NOT NULL);";
+					create table `like` (`id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, `user` varchar(255) NOT NULL, `filepathimage` varchar(255) NOT NULL);
+					create table comments (`id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, `user` varchar(255) NOT NULL, `filepathimage` varchar(255) NOT NULL, `comment` varchar(255) NOT NULL);";
 	$db->exec($inject);
 
 }

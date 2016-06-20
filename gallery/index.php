@@ -44,7 +44,7 @@ function recover_src(id){
 
   $nb = 0;
   
-  $sth = $db->prepare("SELECT filepath FROM image");
+  $sth = $db->prepare("SELECT filepath FROM image ORDER BY id DESC");
   $sth->execute();
 
   $result = $sth->fetchall();

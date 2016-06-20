@@ -14,7 +14,7 @@ function	minimun_one_digit($char)
 	return False;
 }
 
-if (isset($_POST['login']) && isset($_POST['email']) && isset($_POST['password']))
+if ($_POST['login'] !== '' && $_POST['email'] !== '' && isset($_POST['password']))
 {
 	$userName = $db->quote($_POST['login']);
 	$email = $db->quote($_POST['email']);

@@ -8,6 +8,12 @@ body
     overflow-y: scroll;
 }
 
+form
+{
+	display: inline;
+	margin: 0;
+}
+
 a
 {
 	font-family: Arial;
@@ -118,5 +124,5 @@ video {
 #galerie
 {
 	margin: 10px;
-	background-color: #cecece;	
+	background-color: #cecece;
 }

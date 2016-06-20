@@ -46,7 +46,9 @@ $_SESSION['loginOK'] = False;
 			</br>
 			<input type="submit" name="submit" value="Sign-Up" />
 		</form>
-		<input type="submit" name="submit" value="Password Forget it?" />
+		<form method="post" action="forget.php">
+			<input type="submit" name="submit" value="Password Forget it?" />
+		</form>
 	</Div>
 </Div>
 

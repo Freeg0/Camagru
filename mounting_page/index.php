@@ -121,7 +121,7 @@
 
 <Div id="galerie">
 <a style="margin-left: 2%; color: Black;">All my pictures :</a></br>
-<?php
+<!-- <?php
   session_start();
 
   $nb = 0;
@@ -134,28 +134,43 @@
   while (file_exists("../img/".$_SESSION['user']."/img".$nb.".png")) {
     $resultat = "../img/".$_SESSION['user']."/img".$nb.".png";
 echo <<<EOT
-  <img style="margin: 1%; height: 200px; width: 213px;" src="$resultat" />
+  <Div style="display: inline-block;">
+    <img style="margin: 0%; height: 200px; width: 213px;" src="$resultat" />
+    <form method="post" action="delete.php">
+      <input type="submit" name="submit" value='$resultat- DELETE'/>
+    </form>
+  </Div>
 EOT;
     $nb = $nb - 1;
   }
-
-?>
-<!-- <?php
+?> -->
+<?php
   include '../config/setup.php';
+  session_start();
+  $userName = $_SESSION['user'];
 
-  
-  $sth = $db->prepare("SELECT filepath FROM image");
-  $sth->execute();
+  $sth = $db->prepare("SELECT filepath FROM image WHERE user = :userName ORDER BY id DESC");
+  $sth->execute(Array(
+    'userName' => $userName
+  ));
 
   $result = $sth->fetchall();
 
   foreach ($result as $results) {
-echo <<<EOT
-  <img style="margin: 1%; height: 200px; width: 213px;" src="$results[0]" />
+  echo <<<EOT
+  <Div style="display: inline-block;">
+    <img style="margin: 0%; height: 200px; width: 213px;" src="$results[0]" />
+    <form method="post" action="delete.php">
+      <input type="submit" name="submit" value='$results[0]- DELETE'/>
+    </form>
+  </Div>
 EOT;
+//echo <<<EOT
+//  <img style="margin: 1%; height: 200px; width: 213px;" src="$results[0]" />
+//EOT;
 }
 
-?> -->
+?>
 </Div>
 
 <Div id="Footer">
