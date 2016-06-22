@@ -18,7 +18,7 @@ $f = $_SESSION['path'];
 $com = $_POST['commentaire'];
 
 $nb_char = number_of_char($com);
-file_put_contents("prout1", $nb_char);
+
 if ($nb_char > 150) {
 	header( "refresh:0.5;url=picture_page.php" );
 	$message = "Your message have more than 150 character!";

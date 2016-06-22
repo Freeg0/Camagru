@@ -79,7 +79,7 @@ EOT;
 $user1 = $_SESSION['user'];
 $file = $_SESSION['path'];
 
-$sth = $db->prepare("SELECT comment FROM comments WHERE filepathimage = :file");
+$sth = $db->prepare("SELECT comment,user FROM comments WHERE filepathimage = :file");
 $sth->execute(Array(
 		'file' => $file
 	));
@@ -89,7 +89,7 @@ $result = $sth->fetchall();
 
 foreach ($result as $results) {
 echo <<<EOT
-		<b style="color: black;">$user1 : $results[0]</b></br>
+		<b style="color: black;">$results[1] : $results[0]</b></br>
 EOT;
 }
 ?>
